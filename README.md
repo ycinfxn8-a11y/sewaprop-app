@@ -64,6 +64,35 @@ Berbeda dengan aplikasi web biasa yang kehilangan data saat di-_refresh_, SewaPr
 2.  Mulai transaksi baru di tab **Kasir**.
 3.  Pantau dan selesaikan pengembalian di tab **Transaksi**.
 
+# Rangkuman Update Aplikasi Sewa Properti Film
+
+### 1\. Perbaikan Bug "Batal Kembalikan"
+
+-   **Masalah:** Penekanan tombol "Batal Kembalikan" tidak mensinkronkan data stok di database IndexedDB dengan benar, sehingga tampilan tidak berubah.
+-   **Solusi:** Sinkronisasi ganda pada fungsi `handleUndoReturn` dengan validasi stok gudang sebelum mengubah status transaksi kembali menjadi 'Dipinjam'.
+
+### 2\. Perbaikan Bug Diskon & Input Angka
+
+-   **Bug Diskon Persen:** Memperbaiki logika kalkulasi dan tampilan agar persentase diskon terhitung dengan benar terhadap subtotal sebelum ditampilkan pada ringkasan biaya.
+-   **Input Tidak Bisa Dihapus:** Memperbaiki kendala di mana angka pada kolom "Hari" dan "Diskon" tidak bisa dihapus total (kosong).
+-   **Solusi:** Menggunakan state string untuk input dan menambahkan fungsi `onBlur`. Jika pengguna mengosongkan kolom, sistem secara otomatis memberikan nilai default (1 untuk hari, 0 untuk diskon) agar tidak merusak perhitungan sistem.
+
+### 3\. Batasan Tampilan Item Kasir
+
+-   **Update:** Daftar inventaris di halaman Kasir kini dibatasi maksimal **12 item** saja saat pertama kali dibuka tanpa pencarian.
+-   **Tujuan:** Meningkatkan performa _rendering_ dan menjaga antarmuka tetap bersih. Pengguna dapat menggunakan fitur **Pencarian** untuk melihat item lainnya.
+
+### 4\. Validasi & Input Data Penyewa
+
+-   **Penambahan Field:** Menambahkan input **Nomor WhatsApp** (No. HP) penyewa di form checkout.
+-   **Modal Alert Kustom:** Mengganti `alert()` bawaan browser dengan **Modal Alert Kustom** yang muncul jika Nama atau No. HP belum diisi saat proses simpan transaksi.
+
+### 5\. Peningkatan UI/UX
+
+-   **Status Indicator:** Indikator garis warna pada kartu transaksi (Amber untuk Dipinjam, Hijau untuk Dikembalikan).
+-   **Auto-Format:** Nama penyewa otomatis dikonversi ke huruf kapital (Uppercase) untuk kerapihan administrasi.
+
+
 © 2024 SewaProp Team - Sistem Manajemen Properti Film Profesional.
 
 
