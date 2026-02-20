@@ -1,16 +1,70 @@
-# React + Vite
+# SewaProp: Sistem Manajemen Properti Film
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+SewaProp hadir sebagai solusi digital untuk mengatasi kerumitan manajemen logistik di industri film. Aplikasi berbasis web ini dirancang khusus bagi pemilik prop house untuk menyederhanakan pengelolaan stok, akurasi pencatatan transaksi, hingga pemantauan status pengembalian barang dalam satu platform yang intuitif.
 
-Currently, two official plugins are available:
+## 🔗 Demo Aplikasi
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Anda dapat mencoba langsung aplikasi ini melalui tautan berikut: [**https://sewaprop-app.netlify.app/**](https://sewaprop-app.netlify.app/ "null")
 
-## React Compiler
+## 🚀 Fitur Utama
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 1\. Manajemen Inventaris (Inventory Management)
 
-## Expanding the ESLint configuration
+-   **Data Barang**: Menyimpan nama, kategori (Senjata, Kostum, Peralatan, dll), harga sewa per hari, dan jumlah stok.
+-   **Kontrol Inventaris Penuh**: Kelola data properti dengan fleksibel melalui fitur tambah, edit, dan hapus barang yang dapat diperbarui secara seketika (_real-time_).
+-   **Pelacakan Stok Otomatis**: Stok akan berkurang saat disewakan dan bertambah kembali secara otomatis saat barang dikembalikan.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 2\. Sistem Kasir (Point of Sale)
+
+-   **Keranjang Belanja**: Menambahkan beberapa item ke dalam satu daftar sewa.
+-   **Kalkulasi Otomatis**: Menghitung subtotal berdasarkan durasi sewa (hari) dan menerapkan diskon persentase.
+-   **Pencarian Cepat**: Filter barang berdasarkan nama untuk mempercepat proses transaksi.
+
+### 3\. Riwayat Transaksi & Pelacakan
+
+-   **Status Sewa**: Melacak transaksi yang berstatus "Dipinjam" atau "Dikembalikan".
+-   **Log Waktu**: Mencatat tanggal transaksi dan tanggal pengembalian secara presisi.
+
+## ✨ Manfaat Utama
+
+-   **Efisiensi Operasional**: Memangkas waktu pencatatan manual dan meminimalisir kesalahan manusia (human error).
+-   **Aksesibilitas Tinggi**: Desain responsif memungkinkan pengelolaan dari perangkat apa pun, baik di gudang (mobile) maupun di kantor (desktop).
+-   **Offline-Ready**: Berkat IndexedDB, aplikasi tetap stabil meskipun koneksi internet tidak menentu.
+
+## 🛠 Teknologi & Arsitektur
+
+### Modern Frontend Stack
+
+-   **React.js**: Digunakan untuk membangun antarmuka pengguna yang reaktif dan komponen-basi.
+-   **Tailwind CSS**: Memberikan desain UI yang modern, bersih, dan sepenuhnya responsif (nyaman di HP maupun Desktop).
+-   **Lucide React**: Library ikon untuk navigasi visual yang intuitif.
+
+### Sistem Penyimpanan: IndexedDB
+
+Berbeda dengan aplikasi web biasa yang kehilangan data saat di-_refresh_, SewaProp menggunakan **IndexedDB**:
+
+-   **Database Lokal Browser**: Data disimpan di dalam memori permanen browser pengguna.
+-   **Persistensi Tinggi**: Data tetap ada meskipun browser ditutup, komputer dimatikan, atau halaman dimuat ulang.
+-   **Mandiri & Privat (Serverless)**: Seluruh data diproses dan disimpan di perangkat Anda tanpa perlu database eksternal (seperti MySQL). Hal ini menjamin privasi data yang lebih baik, kecepatan akses maksimal, serta nol biaya pemeliharaan server.
+
+## 🛠 Cara Kerja Penyimpanan Data
+
+1.  **Inisialisasi**: Saat aplikasi pertama kali dibuka, sistem memeriksa apakah database `SewaPropDB_V2` sudah ada. Jika belum, sistem membuat dua _Object Stores_ (tabel): `inventory` dan `transactions`.
+2.  **Operasi Asinkron**: Semua penulisan data menggunakan pola _asynchronous_ untuk memastikan antarmuka (UI) tidak membeku (_freeze_) saat memproses data besar.
+3.  **Sinkronisasi State**: Setiap perubahan pada database IndexedDB akan langsung direfleksikan ke State React, menjaga tampilan tetap mutakhir.
+
+## ⚠️ Catatan Penting
+
+-   **Penyimpanan Spesifik Browser**: Karena menggunakan IndexedDB, data yang Anda masukkan di Google Chrome tidak akan muncul di Firefox atau di perangkat lain.
+-   **Keamanan Context**: Fitur penyimpanan ini memerlukan koneksi **HTTPS** agar dapat berfungsi dengan stabil di lingkungan produksi.
+
+### 🛠️ Langkah Cepat Memulai
+
+1.  Tambahkan daftar properti Anda di tab **Inventaris**.
+2.  Mulai transaksi baru di tab **Kasir**.
+3.  Pantau dan selesaikan pengembalian di tab **Transaksi**.
+
+© 2024 SewaProp Team - Sistem Manajemen Properti Film Profesional.
+
+
+
